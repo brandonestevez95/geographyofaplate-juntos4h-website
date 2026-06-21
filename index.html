@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geography of a Plate — Juntos Summer Academy 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --accent: #0071e3;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --red: #CC0000;
+      --shadow: 0 2px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
+      --radius: 14px;
+      --radius-sm: 10px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: #fff;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      padding: 52px 24px 44px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-size: clamp(26px, 6vw, 42px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+      line-height: 1.15;
+    }
+    .hero-sub {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 16px 80px;
+    }
+
+    section {
+      margin-top: 52px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── Project intro ── */
+    .intro-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+    }
+    .intro-card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.015em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .intro-card p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Tool cards ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 560px) {
+      .card-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .tool-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .tool-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.07);
+    }
+    .tool-card:active { transform: translateY(0); }
+    .tool-card-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .tool-card-url {
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .tool-card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .tool-card-arrow {
+      margin-top: 8px;
+      font-size: 18px;
+      color: var(--accent);
+      align-self: flex-end;
+    }
+
+    /* ── Doc cards ── */
+    .doc-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .doc-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.07);
+    }
+    .doc-card-name {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .doc-card-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .doc-card-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 980px;
+      text-decoration: none;
+      align-self: flex-start;
+      transition: background .15s ease, opacity .15s ease;
+    }
+    .doc-card-btn:hover { background: #0077ed; }
+    .doc-card-btn:active { opacity: .8; }
+
+    /* ── Data source list ── */
+    .source-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .source-item {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text);
+      gap: 12px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .source-item:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,.1);
+    }
+    .source-item:active { transform: translateY(0); }
+    .source-name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .source-url {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .source-arrow {
+      font-size: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid rgba(0,0,0,.08);
+      background: #fff;
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <p class="hero-eyebrow">Juntos Summer Academy 2026 · NC State University</p>
+    <h1>Geography of a Plate</h1>
+    <p class="hero-sub">Your GIS project hub for the week.</p>
+  </header>
+
+  <main>
+
+    <!-- SECTION 1: The Project -->
+    <section id="project">
+      <p class="section-label">The Project</p>
+      <div class="intro-card">
+        <h2>Where does your food actually come from?</h2>
+        <p>This week you're going to map the real supply chain of a meal you actually eat — figure out where every ingredient comes from, what would break it, and what that means. No answer key. You find it.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Your Tools -->
+    <section id="tools">
+      <p class="section-label">Your Tools</p>
+      <div class="card-grid">
+
+        <a class="tool-card" href="https://taco-app.brandonestevez.com" target="_blank" rel="noopener">
+          <span class="tool-card-name">Taco App</span>
+          <span class="tool-card-url">taco-app.brandonestevez.com</span>
+          <span class="tool-card-desc">The supply chain reveal from Day 1. Explore it.</span>
+          <span class="tool-card-arrow">↗</span>
+        </a>
+
+        <!-- [PLACEHOLDER] Replace href below with the actual ArcGIS Online Group URL -->
+        <a class="tool-card" href="[AGOL_GROUP_URL]" target="_blank" rel="noopener">
+          <span class="tool-card-name">ArcGIS Online Group</span>
+          <span class="tool-card-url">ArcGIS Online</span>
+          <span class="tool-card-desc">Your map lives here. Open your group to access the template.</span>
+          <span class="tool-card-arrow">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: Your Docs -->
+    <section id="docs">
+      <p class="section-label">Your Docs</p>
+      <div class="card-grid">
+
+        <!-- [PLACEHOLDER] Replace href with actual Google Doc /copy URL for Ingredient Research Doc -->
+        <div class="doc-card">
+          <span class="doc-card-name">Ingredient Research Doc</span>
+          <span class="doc-card-desc">Start here on Day 1. List your ingredients and your first guess at where they come from.</span>
+          <a class="doc-card-btn" href="[INGREDIENT_DOC_URL]/copy" target="_blank" rel="noopener">Make a Copy</a>
+        </div>
+
+        <!-- [PLACEHOLDER] Replace href with actual Google Doc /copy URL for Data Source Cheat Sheet -->
+        <div class="doc-card">
+          <span class="doc-card-name">Data Source Cheat Sheet</span>
+          <span class="doc-card-desc">Your research guide for Day 2. Step-by-step for Business Analyst, USDA FAS, and FAO STAT.</span>
+          <a class="doc-card-btn" href="[CHEAT_SHEET_URL]/copy" target="_blank" rel="noopener">Make a Copy</a>
+        </div>
+
+        <!-- [PLACEHOLDER] Replace href with actual Google Doc /copy URL for Poster Planning Sheet -->
+        <div class="doc-card">
+          <span class="doc-card-name">Poster Planning Sheet</span>
+          <span class="doc-card-desc">Use this on Day 3 to draft your thesis and plan your three panels.</span>
+          <a class="doc-card-btn" href="[POSTER_SHEET_URL]/copy" target="_blank" rel="noopener">Make a Copy</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 4: Data Sources -->
+    <section id="data">
+      <p class="section-label">Data Sources</p>
+      <div class="source-list">
+
+        <a class="source-item" href="https://www.esri.com/en-us/arcgis/products/arcgis-business-analyst/overview" target="_blank" rel="noopener">
+          <div>
+            <div class="source-name">ArcGIS Business Analyst</div>
+            <div class="source-url">Primary research tool</div>
+          </div>
+          <span class="source-arrow">↗</span>
+        </a>
+
+        <a class="source-item" href="https://fas.usda.gov/data" target="_blank" rel="noopener">
+          <div>
+            <div class="source-name">USDA FAS</div>
+            <div class="source-url">fas.usda.gov/data</div>
+          </div>
+          <span class="source-arrow">↗</span>
+        </a>
+
+        <a class="source-item" href="https://www.fao.org/faostat" target="_blank" rel="noopener">
+          <div>
+            <div class="source-name">FAO STAT</div>
+            <div class="source-url">fao.org/faostat</div>
+          </div>
+          <span class="source-arrow">↗</span>
+        </a>
+
+        <a class="source-item" href="https://livingatlas.arcgis.com" target="_blank" rel="noopener">
+          <div>
+            <div class="source-name">Esri Living Atlas</div>
+            <div class="source-url">livingatlas.arcgis.com</div>
+          </div>
+          <span class="source-arrow">↗</span>
+        </a>
+
+        <!-- [PLACEHOLDER] Replace href below with the actual Rubric URL -->
+        <a class="source-item" href="[RUBRIC_URL]" target="_blank" rel="noopener">
+          <div>
+            <div class="source-name">Juntos Presentation Rubric</div>
+            <div class="source-url">Grading criteria for your poster and presentation</div>
+          </div>
+          <span class="source-arrow">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Built by Brandon Estevez · National 4-H Geospatial Leadership Team · NC State University 2026
+  </footer>
+
+</body>
+</html>
