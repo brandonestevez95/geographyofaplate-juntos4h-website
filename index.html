@@ -8,259 +8,343 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f5f5f7;
-      --card: #ffffff;
-      --accent: #0071e3;
-      --text: #1d1d1f;
-      --muted: #6e6e73;
-      --red: #CC0000;
-      --shadow: 0 2px 12px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.06);
-      --radius: 14px;
-      --radius-sm: 10px;
+      /* NC State */
+      --red:          #CC0000;
+      --red-dark:     #990000;
+      --red-dim:      rgba(204,0,0,.12);
+      --red-border:   rgba(204,0,0,.25);
+      /* Juntos */
+      --green:        #4D7E60;
+      --green-dark:   #2D5A3D;
+      --green-dim:    rgba(77,126,96,.12);
+      --green-border: rgba(77,126,96,.28);
+      --green-light:  #EBF4EF;
+      /* Surface */
+      --dark:         #0F0F0F;
+      --dark-2:       #1A1A1A;
+      --bg:           #F2F1EE;
+      --card:         #FFFFFF;
+      --text:         #1A1A1A;
+      --muted:        #6B6B6B;
+      --border:       rgba(0,0,0,.07);
+      /* Util */
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.06);
+      --shadow-md:    0 4px 20px rgba(0,0,0,.11), 0 2px 6px rgba(0,0,0,.07);
+      --radius:       14px;
+      --radius-sm:    10px;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       line-height: 1.5;
     }
 
+    /* ── Top stripe ── */
+    .top-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--red) 52%, var(--green) 100%);
+    }
+
     /* ── Hero ── */
     .hero {
-      background: #fff;
-      border-bottom: 1px solid rgba(0,0,0,.08);
-      padding: 52px 24px 44px;
+      background: var(--dark);
+      padding: 48px 24px 52px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
-    .hero-eyebrow {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 10px;
+
+    /* subtle grain overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(204,0,0,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(77,126,96,.06) 0%, transparent 60%);
+      pointer-events: none;
     }
-    .hero h1 {
-      font-size: clamp(26px, 6vw, 42px);
+
+    .hero-badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 26px;
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: -.02em;
-      color: var(--text);
-      line-height: 1.15;
+      letter-spacing: .07em;
+      text-transform: uppercase;
     }
+    .badge-red   { background: var(--red-dim); color: #FF8080; border: 1px solid var(--red-border); }
+    .badge-green { background: var(--green-dim); color: #7DC499; border: 1px solid var(--green-border); }
+    .badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+    .hero h1 {
+      font-size: clamp(34px, 9vw, 58px);
+      font-weight: 800;
+      letter-spacing: -.035em;
+      color: #FFFFFF;
+      line-height: 1.08;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 span { color: var(--red); }
+
     .hero-sub {
-      margin-top: 10px;
-      font-size: 16px;
-      color: var(--muted);
-      font-weight: 400;
+      font-size: 14px;
+      color: rgba(255,255,255,.38);
+      font-weight: 500;
+      letter-spacing: .02em;
+      position: relative;
+      z-index: 1;
     }
 
     /* ── Layout ── */
     main {
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
-      padding: 0 16px 80px;
+      padding: 0 16px 88px;
     }
+    section { margin-top: 52px; }
 
-    section {
-      margin-top: 52px;
-    }
-
-    .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
       margin-bottom: 14px;
     }
+    .section-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-red   { background: var(--red); }
+    .dot-green { background: var(--green); }
+    .dot-gray  { background: #AAAAAA; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
 
-    /* ── Project intro ── */
+    /* ── Intro card ── */
     .intro-card {
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      padding: 26px 22px;
     }
     .intro-card h2 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
-      letter-spacing: -.015em;
-      margin-bottom: 12px;
+      letter-spacing: -.02em;
+      margin-bottom: 10px;
       color: var(--text);
+      line-height: 1.3;
     }
     .intro-card p {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--muted);
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    /* ── Tool cards ── */
-    .card-grid {
+    /* ── Grid helpers ── */
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr;
       gap: 12px;
     }
-    @media (min-width: 560px) {
-      .card-grid { grid-template-columns: 1fr 1fr; }
-    }
+    @media (min-width: 500px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
 
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 500px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 700px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+    /* ── Tool cards ── */
     .tool-card {
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--red);
+      padding: 20px 18px;
       text-decoration: none;
       color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
       transition: transform .15s ease, box-shadow .15s ease;
     }
     .tool-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.07);
+      box-shadow: var(--shadow-md);
     }
     .tool-card:active { transform: translateY(0); }
-    .tool-card-name {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .tool-card-url {
-      font-size: 13px;
-      color: var(--accent);
-      font-weight: 500;
-    }
-    .tool-card-desc {
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-    .tool-card-arrow {
-      margin-top: 8px;
-      font-size: 18px;
-      color: var(--accent);
-      align-self: flex-end;
-    }
+    .tool-card-name { font-size: 16px; font-weight: 700; color: var(--text); }
+    .tool-card-url  { font-size: 12px; color: var(--red); font-weight: 600; letter-spacing: .01em; }
+    .tool-card-desc { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+    .tool-card-arrow { margin-top: 10px; font-size: 13px; color: var(--red); align-self: flex-end; opacity: .5; }
 
     /* ── Doc cards ── */
     .doc-card {
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      padding: 20px 18px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
       transition: transform .15s ease, box-shadow .15s ease;
     }
     .doc-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.07);
+      box-shadow: var(--shadow-md);
     }
-    .doc-card-name {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
+    .doc-day {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      align-self: flex-start;
+      margin-bottom: 10px;
     }
-    .doc-card-desc {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .doc-card-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .doc-card-desc { font-size: 13px; color: var(--muted); line-height: 1.55; flex: 1; }
     .doc-card-btn {
       display: inline-block;
-      margin-top: 10px;
-      padding: 9px 18px;
-      background: var(--accent);
+      margin-top: 14px;
+      padding: 8px 15px;
+      background: var(--green);
       color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 980px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      border-radius: 7px;
       text-decoration: none;
       align-self: flex-start;
-      transition: background .15s ease, opacity .15s ease;
+      transition: background .15s ease;
     }
-    .doc-card-btn:hover { background: #0077ed; }
-    .doc-card-btn:active { opacity: .8; }
+    .doc-card-btn:hover { background: var(--green-dark); }
 
     /* ── Data source list ── */
-    .source-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .source-list { display: flex; flex-direction: column; gap: 8px; }
+
     .source-item {
       background: var(--card);
       border-radius: var(--radius-sm);
-      box-shadow: var(--shadow);
-      padding: 16px 18px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      padding: 13px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
       color: var(--text);
       gap: 12px;
-      transition: transform .15s ease, box-shadow .15s ease;
+      transition: transform .15s ease, box-shadow .15s ease, border-left .12s ease;
     }
     .source-item:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0,0,0,.1);
+      box-shadow: var(--shadow-md);
+      border-left: 3px solid var(--green);
+      padding-left: 14px;
     }
-    .source-item:active { transform: translateY(0); }
-    .source-name {
-      font-size: 15px;
-      font-weight: 600;
-    }
-    .source-url {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-    .source-arrow {
-      font-size: 16px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
+    .source-name { font-size: 14px; font-weight: 600; }
+    .source-url  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .source-arrow { font-size: 13px; color: var(--muted); flex-shrink: 0; }
+    .source-item:hover .source-arrow { color: var(--green); }
 
     /* ── Footer ── */
     footer {
-      border-top: 1px solid rgba(0,0,0,.08);
-      background: #fff;
-      padding: 28px 24px;
+      background: var(--dark);
+      padding: 36px 24px;
       text-align: center;
-      font-size: 13px;
-      color: var(--muted);
+    }
+    .footer-badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+    .footer-pill {
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .fp-red   { background: var(--red-dim); color: rgba(255,120,120,.65); border: 1px solid var(--red-border); }
+    .fp-green { background: var(--green-dim); color: rgba(125,196,153,.65); border: 1px solid var(--green-border); }
+    .footer-text {
+      font-size: 12px;
+      color: rgba(255,255,255,.25);
       line-height: 1.7;
     }
   </style>
 </head>
 <body>
 
+  <div class="top-stripe"></div>
+
   <!-- HERO -->
   <header class="hero">
-    <p class="hero-eyebrow">Juntos Summer Academy 2026 · NC State University</p>
-    <h1>Geography of a Plate</h1>
-    <p class="hero-sub">Your GIS project hub for the week.</p>
+    <div class="hero-badges">
+      <span class="badge badge-red"><span class="badge-dot"></span>NC State University</span>
+      <span class="badge badge-green"><span class="badge-dot"></span>Juntos 2026</span>
+    </div>
+    <h1>Geography of <span>a Plate</span></h1>
+    <p class="hero-sub">Juntos Summer Academy · GIS Project Hub · NC State University</p>
   </header>
 
   <main>
 
-    <!-- SECTION 1: The Project -->
+    <!-- The Project -->
     <section id="project">
-      <p class="section-label">The Project</p>
+      <div class="section-header">
+        <span class="section-dot dot-red"></span>
+        <span class="section-label">The Project</span>
+      </div>
       <div class="intro-card">
         <h2>Where does your food actually come from?</h2>
         <p>This week you're going to map the real supply chain of a meal you actually eat — figure out where every ingredient comes from, what would break it, and what that means. No answer key. You find it.</p>
       </div>
     </section>
 
-    <!-- SECTION 2: Your Tools -->
+    <!-- Your Tools -->
     <section id="tools">
-      <p class="section-label">Your Tools</p>
-      <div class="card-grid">
+      <div class="section-header">
+        <span class="section-dot dot-red"></span>
+        <span class="section-label">Your Tools</span>
+      </div>
+      <div class="grid-2">
 
         <a class="tool-card" href="https://taco-app.brandonestevez.com" target="_blank" rel="noopener">
           <span class="tool-card-name">Taco App</span>
@@ -269,7 +353,7 @@
           <span class="tool-card-arrow">↗</span>
         </a>
 
-        <!-- [PLACEHOLDER] Replace href below with the actual ArcGIS Online Group URL -->
+        <!-- [PLACEHOLDER] Replace href with actual ArcGIS Online Group URL -->
         <a class="tool-card" href="[AGOL_GROUP_URL]" target="_blank" rel="noopener">
           <span class="tool-card-name">ArcGIS Online Group</span>
           <span class="tool-card-url">ArcGIS Online</span>
@@ -280,38 +364,47 @@
       </div>
     </section>
 
-    <!-- SECTION 3: Your Docs -->
+    <!-- Your Docs -->
     <section id="docs">
-      <p class="section-label">Your Docs</p>
-      <div class="card-grid">
+      <div class="section-header">
+        <span class="section-dot dot-green"></span>
+        <span class="section-label">Your Docs</span>
+      </div>
+      <div class="grid-3">
 
-        <!-- [PLACEHOLDER] Replace href with actual Google Doc /copy URL for Ingredient Research Doc -->
+        <!-- [PLACEHOLDER] Replace href with Google Doc /copy URL for Ingredient Research Doc -->
         <div class="doc-card">
+          <span class="doc-day">Day 1</span>
           <span class="doc-card-name">Ingredient Research Doc</span>
-          <span class="doc-card-desc">Start here on Day 1. List your ingredients and your first guess at where they come from.</span>
+          <span class="doc-card-desc">Start here. List your ingredients and your first guess at where they come from.</span>
           <a class="doc-card-btn" href="[INGREDIENT_DOC_URL]/copy" target="_blank" rel="noopener">Make a Copy</a>
         </div>
 
-        <!-- [PLACEHOLDER] Replace href with actual Google Doc /copy URL for Data Source Cheat Sheet -->
+        <!-- [PLACEHOLDER] Replace href with Google Doc /copy URL for Data Source Cheat Sheet -->
         <div class="doc-card">
+          <span class="doc-day">Day 2</span>
           <span class="doc-card-name">Data Source Cheat Sheet</span>
-          <span class="doc-card-desc">Your research guide for Day 2. Step-by-step for Business Analyst, USDA FAS, and FAO STAT.</span>
+          <span class="doc-card-desc">Step-by-step for Business Analyst, USDA FAS, and FAO STAT.</span>
           <a class="doc-card-btn" href="[CHEAT_SHEET_URL]/copy" target="_blank" rel="noopener">Make a Copy</a>
         </div>
 
-        <!-- [PLACEHOLDER] Replace href with actual Google Doc /copy URL for Poster Planning Sheet -->
+        <!-- [PLACEHOLDER] Replace href with Google Doc /copy URL for Poster Planning Sheet -->
         <div class="doc-card">
+          <span class="doc-day">Day 3</span>
           <span class="doc-card-name">Poster Planning Sheet</span>
-          <span class="doc-card-desc">Use this on Day 3 to draft your thesis and plan your three panels.</span>
+          <span class="doc-card-desc">Draft your thesis and plan your three panels before touching the trifold.</span>
           <a class="doc-card-btn" href="[POSTER_SHEET_URL]/copy" target="_blank" rel="noopener">Make a Copy</a>
         </div>
 
       </div>
     </section>
 
-    <!-- SECTION 4: Data Sources -->
+    <!-- Data Sources -->
     <section id="data">
-      <p class="section-label">Data Sources</p>
+      <div class="section-header">
+        <span class="section-dot dot-gray"></span>
+        <span class="section-label">Data Sources</span>
+      </div>
       <div class="source-list">
 
         <a class="source-item" href="https://www.esri.com/en-us/arcgis/products/arcgis-business-analyst/overview" target="_blank" rel="noopener">
@@ -346,7 +439,7 @@
           <span class="source-arrow">↗</span>
         </a>
 
-        <!-- [PLACEHOLDER] Replace href below with the actual Rubric URL -->
+        <!-- [PLACEHOLDER] Replace href with actual Rubric URL -->
         <a class="source-item" href="[RUBRIC_URL]" target="_blank" rel="noopener">
           <div>
             <div class="source-name">Juntos Presentation Rubric</div>
@@ -361,7 +454,11 @@
   </main>
 
   <footer>
-    Built by Brandon Estevez · National 4-H Geospatial Leadership Team · NC State University 2026
+    <div class="footer-badges">
+      <span class="footer-pill fp-red">NC State</span>
+      <span class="footer-pill fp-green">Juntos</span>
+    </div>
+    <p class="footer-text">Built by Brandon Estevez · National 4-H Geospatial Leadership Team · NC State University 2026</p>
   </footer>
 
 </body>
